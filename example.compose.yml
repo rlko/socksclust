@@ -1,0 +1,40 @@
+services:
+  proxy-0:
+    build:
+      context: .
+      network: host
+    ports:
+      - 1080:1080
+    environment:
+      SSH_USER: ${SSH_USER_SOCKS_1}
+      SSH_HOST: ${SSH_HOST_SOCKS_1}
+      SSH_KEY_PATH: /root/.ssh/id_ed25519
+    volumes:
+      - ./id_ed25519:/root/.ssh/id_ed25519:ro
+    restart: always
+
+  proxy-1:
+    build:
+      context: .
+      network: host
+    ports:
+      - 1081:1080
+    environment:
+      SSH_USER: ${SSH_USER_SOCKS_2}
+      SSH_HOST: ${SSH_HOST_SOCKS_2}
+      SSH_PORT: ${SSH_PORT_SOCKS_2}
+    volumes:
+      - ./id_ed25519:/root/.ssh/id_ed25519:ro
+    restart: always
+
+  proxy-2:
+    build:
+      context: .
+      network: host
+    ports:
+      - 1082:1080
+    environment:
+      SSH_USER: ${SSH_USER_SOCKS_3}
+      SSH_HOST: ${SSH_HOST_SOCKS_3}
+      SSH_PASSWORD: ${SSH_PASSWORD_3}
+    restart: always
