@@ -23,7 +23,7 @@ The following table lists the environment variables that can be set for each SOC
 | `SSH_HOST`      | The hostname or IP address of the remote server.               | N/A         | Yes          |
 | `SSH_PORT`      | The port for SSH connection.                                   | `22`        | No           |
 | `SSH_PASSWORD`  | The password for SSH authentication (if not using SSH key).   | N/A         | No           |
-| `SSH_KEY_PATH`  | The path to the SSH private key for key-based authentication.  | N/A         | If using an SSH key |
+| `SSH_KEY_PATH`  | The path to the SSH private key for key-based authentication.  | `/root/.ssh/id_ed25519` | If using an SSH key |
 
 You can set these variables in the `docker-compose.yml` file or use `.env` files.
 
@@ -36,7 +36,7 @@ You can set these variables in the `docker-compose.yml` file or use `.env` files
    ```
 
 * **SSH Key Setup**:
-   If you are using an SSH key authentication, ensure your SSH private key matches the environment variable **SSH_KEY_PATH** (which is `/root/.ssh/id_ed25519`by default) and is mounted as a volume.
+   If you are using an SSH key authentication, ensure your SSH private key matches the environment variable **SSH_KEY_PATH** (which is `/root/.ssh/id_ed25519` by default) and is mounted as a volume.
 
 ## Docker Compose Configuration Example
 
@@ -71,7 +71,7 @@ services:
     environment:
       SSH_USER: user3
       SSH_HOST: remote_server_3
-      SSH_KEY_PATH=/root/.ssh/socks_ed25519
+      SSH_KEY_PATH: /root/.ssh/socks_ed25519
     volumes:
       - ./socks_ed25519:/root/.ssh/socks_ed25519:ro
     restart: always
