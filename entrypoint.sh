@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$SSH_USER" ] || [ -z "$SSH_HOST" ]; then
+if [ -z "${SSH_USER}" ] || [ -z "${SSH_HOST}" ]; then
   echo "SSH_USER and SSH_HOST must be set!"
   exit 1
 fi
@@ -17,5 +17,5 @@ else
   exit 1
 fi
 
-${AUTH_METHOD} -p ${SSH_PORT} -D ${SOCKS_PORT} -N ${SSH_USER}@${SSH_HOST} -o StrictHostKeyChecking=no
+${AUTH_METHOD} -p ${SSH_PORT} -D 0.0.0.0:${SOCKS_PORT} -N ${SSH_USER}@${SSH_HOST} -o StrictHostKeyChecking=no
 
